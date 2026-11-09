@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Shelf — Digital Library Catalog</title>
+  <meta name="description" content="Open Shelf: browse, search and save books from a digital library catalog.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <svg class="logo" viewBox="0 0 36 30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6C13 2 6 2 2 4v22c4-2 11-2 16 2 5-4 12-4 16-2V4c-4-2-11-2-16 2z"/><path d="M18 6v22"/>
+        </svg>
+        Open Shelf
+      </a>
+
+      <nav class="side-nav" aria-label="Main">
+        <ul>
+          <li>
+            <a href="index.html" aria-current="page">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#featured">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+              Browse Books
+            </a>
+          </li>
+          <li>
+            <a href="#categories">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+              Categories
+            </a>
+          </li>
+          <li>
+            <a href="login.html">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+              My Reading List
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Decorative shelf -->
+      <div class="mini-shelf shelf" aria-hidden="true">
+        <span class="book b4"></span>
+        <span class="book b3"></span>
+        <span class="book b2"></span>
+        <svg class="plant" viewBox="0 0 90 110">
+          <g fill="#4f8a4a">
+            <path d="M45 75C44 55 40 35 30 15" stroke="#3a6b3a" stroke-width="2" fill="none"/>
+            <path d="M46 75C50 55 58 40 72 28" stroke="#3a6b3a" stroke-width="2" fill="none"/>
+            <ellipse cx="30" cy="18" rx="7" ry="12" transform="rotate(-30 30 18)"/>
+            <ellipse cx="36" cy="42" rx="6" ry="11" transform="rotate(-60 36 42)"/>
+            <ellipse cx="58" cy="44" rx="6" ry="11" transform="rotate(50 58 44)"/>
+            <ellipse cx="70" cy="28" rx="7" ry="12" transform="rotate(40 70 28)"/>
+            <ellipse cx="52" cy="22" rx="5" ry="10" fill="#6aa35f"/>
+          </g>
+          <path d="M26 74h38l-5 34H31z" fill="#e9d7b5"/>
+          <rect x="24" y="70" width="42" height="8" rx="2" fill="#d8c19a"/>
+        </svg>
+      </div>
+    </aside>
+
+    <!-- ===== Main column ===== -->
+    <div class="main">
+
+      <header class="topbar">
+        <!-- Milestone 1: search is a visual placeholder; it jumps to the featured books -->
+        <form class="search" action="#featured" role="search">
+          <div class="search-field">
+            <label for="search-input" class="visually-hidden">Search by title or author</label>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+            <input id="search-input" type="search" placeholder="Search by title or author…">
+          </div>
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <div class="top-actions">
+          <a class="top-link" href="login.html">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+            Log In
+          </a>
+          <a class="btn btn-accent" href="register.html">Sign Up</a>
+        </div>
+      </header>
+
+      <main>
+        <!-- ===== Hero ===== -->
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <h1 id="hero-title">Your next chapter <span class="accent">starts here.</span></h1>
+            <p>Discover, explore, and save books you'll love.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#featured">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6C9 4 5 4 2 5v14c3-1 7-1 10 1 3-2 7-2 10-1V5c-3-1-7-1-10 1z"/><path d="M12 6v14"/></svg>
+                Browse Books
+              </a>
+              <a class="btn btn-outline" href="#featured">Continue as Guest</a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <div class="shelf">
+              <span class="book"></span>
+              <span class="book b2"></span>
+              <span class="book b3"></span>
+              <span class="book b5 lean"></span>
+              <div class="book-stack">
+                <span class="book-flat f3"></span>
+                <span class="book-flat"></span>
+                <span class="book-flat f2"></span>
+              </div>
+              <svg class="plant" viewBox="0 0 90 110">
+                <g fill="#4f8a4a">
+                  <path d="M45 75C44 55 40 35 30 15" stroke="#3a6b3a" stroke-width="2" fill="none"/>
+                  <path d="M46 75C50 55 58 40 72 28" stroke="#3a6b3a" stroke-width="2" fill="none"/>
+                  <ellipse cx="30" cy="18" rx="7" ry="12" transform="rotate(-30 30 18)"/>
+                  <ellipse cx="36" cy="42" rx="6" ry="11" transform="rotate(-60 36 42)"/>
+                  <ellipse cx="58" cy="44" rx="6" ry="11" transform="rotate(50 58 44)"/>
+                  <ellipse cx="70" cy="28" rx="7" ry="12" transform="rotate(40 70 28)"/>
+                  <ellipse cx="52" cy="22" rx="5" ry="10" fill="#6aa35f"/>
+                </g>
+                <path d="M26 74h38l-5 34H31z" fill="#e9d7b5"/>
+                <rect x="24" y="70" width="42" height="8" rx="2" fill="#d8c19a"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Featured books (target of "Continue as Guest") ===== -->
+        <section id="featured" class="featured" aria-labelledby="featured-title">
+          <p class="guest-note">
+            <strong>You're browsing as a guest.</strong> Search and explore freely —
+            <a href="register.html">create an account</a> to save books to your reading list.
+          </p>
+
+          <div class="section-head">
+            <h2 id="featured-title">Featured Books</h2>
+            <p>Sample titles for Milestone 1</p>
+          </div>
+
+          <ul class="book-grid">
+            <li>
+              <article class="book-card">
+                <div class="cover cover-java">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <circle cx="72" cy="35" r="10" fill="#f3d9a4"/>
+                    <path d="M0 90l30-30 25 20 20-25 25 25v35H0z" fill="#3f7a4f"/>
+                    <path d="M0 105q50-20 100-5v25H0z" fill="#2f5e3c"/>
+                  </svg>
+                </div>
+                <h3>Introduction to Java</h3>
+                <p class="author">by Alex Carter</p>
+                <span class="tag">Technology</span>
+              </article>
+            </li>
+
+            <li>
+              <article class="book-card">
+                <div class="cover cover-sky">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <circle cx="62" cy="38" r="14" fill="#f5d77a"/>
+                    <circle cx="69" cy="33" r="12" fill="#3b3f86"/>
+                    <g fill="#f5d77a"><circle cx="20" cy="22" r="1.8"/><circle cx="35" cy="45" r="1.5"/><circle cx="85" cy="60" r="1.6"/><circle cx="15" cy="62" r="1.4"/><circle cx="45" cy="18" r="1.3"/></g>
+                    <path d="M0 100l25-22 20 14 25-22 30 25v30H0z" fill="#5b5fb0"/>
+                  </svg>
+                </div>
+                <h3>The Night Sky</h3>
+                <p class="author">by Nora Bright</p>
+                <span class="tag science">Science</span>
+              </article>
+            </li>
+
+            <li>
+              <article class="book-card">
+                <div class="cover cover-history">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <g fill="#b5843d">
+                      <path d="M18 46l32-18 32 18z"/>
+                      <rect x="20" y="48" width="60" height="5"/>
+                      <rect x="26" y="56" width="7" height="32"/><rect x="40" y="56" width="7" height="32"/>
+                      <rect x="54" y="56" width="7" height="32"/><rect x="68" y="56" width="7" height="32"/>
+                      <rect x="18" y="90" width="64" height="7"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>World History</h3>
+                <p class="author">by Charles Dunmore</p>
+                <span class="tag history">History</span>
+              </article>
+            </li>
+
+            <li>
+              <article class="book-card">
+                <div class="cover cover-advjava">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <path d="M50 105V30" stroke="#2f5e3c" stroke-width="3"/>
+                    <g fill="#2f5e3c">
+                      <ellipse cx="38" cy="45" rx="6" ry="13" transform="rotate(-45 38 45)"/>
+                      <ellipse cx="62" cy="45" rx="6" ry="13" transform="rotate(45 62 45)"/>
+                      <ellipse cx="36" cy="70" rx="6" ry="13" transform="rotate(-50 36 70)"/>
+                      <ellipse cx="64" cy="70" rx="6" ry="13" transform="rotate(50 64 70)"/>
+                      <ellipse cx="50" cy="28" rx="5" ry="10"/>
+                    </g>
+                  </svg>
+                </div>
+                <h3>Advanced Java</h3>
+                <p class="author">by Megan Lee</p>
+                <span class="tag">Technology</span>
+              </article>
+            </li>
+
+            <li>
+              <article class="book-card">
+                <div class="cover cover-web">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <circle cx="50" cy="72" r="22" fill="#fbe3a6"/>
+                    <rect y="72" width="100" height="53" fill="#c2552d"/>
+                    <path d="M0 92q25-10 50 0t50 0v33H0z" fill="#8a3b22"/>
+                  </svg>
+                </div>
+                <h3>Java Web Development</h3>
+                <p class="author">by Daniel Park</p>
+                <span class="tag">Technology</span>
+              </article>
+            </li>
+
+            <li>
+              <article class="book-card">
+                <div class="cover cover-garden">
+                  <svg viewBox="0 0 100 125" aria-hidden="true">
+                    <path d="M50 110V62" stroke="#3f7a4f" stroke-width="3"/>
+                    <ellipse cx="40" cy="90" rx="5" ry="11" transform="rotate(-50 40 90)" fill="#3f7a4f"/>
+                    <g fill="#c2552d">
+                      <circle cx="50" cy="40" r="9"/><circle cx="64" cy="50" r="9"/><circle cx="59" cy="66" r="9"/>
+                      <circle cx="41" cy="66" r="9"/><circle cx="36" cy="50" r="9"/>
+                    </g>
+                    <circle cx="50" cy="54" r="7" fill="#f5d77a"/>
+                  </svg>
+                </div>
+                <h3>The Quiet Garden</h3>
+                <p class="author">by Elena Ruiz</p>
+                <span class="tag fiction">Fiction</span>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ===== Categories ===== -->
+        <section id="categories" class="categories" aria-labelledby="categories-title">
+          <div class="section-head">
+            <h2 id="categories-title">Categories</h2>
+            <p>Filtering arrives in a later milestone</p>
+          </div>
+          <ul class="chip-list">
+            <li><span class="chip">Technology</span></li>
+            <li><span class="chip">Science</span></li>
+            <li><span class="chip">History</span></li>
+            <li><span class="chip">Fiction</span></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        &copy; 2026 Open Shelf — Milestone 1 frontend prototype.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
