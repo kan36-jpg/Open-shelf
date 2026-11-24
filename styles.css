@@ -1,5 +1,5 @@
 /* ==========================================================
-   Open Shelf — shared stylesheet (Milestone 1)
+   Open Shelf — shared stylesheet
    Used by index.html, login.html and register.html
    ========================================================== */
 
@@ -29,6 +29,8 @@
 *,
 *::before,
 *::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; }
 
@@ -125,6 +127,8 @@ img, svg { display: block; }
 .btn-outline-accent:hover { background: #fadccf; color: var(--rust-dark); }
 
 .btn-block { width: 100%; padding: 0.8rem 1rem; font-size: 1.05rem; }
+
+.btn[aria-disabled="true"] { opacity: 0.65; cursor: progress; pointer-events: none; }
 
 /* ==========================================================
    HOME PAGE
@@ -369,6 +373,63 @@ img, svg { display: block; }
 .tag.history { background: #8a6a2f; }
 .tag.fiction { background: #3f7a4f; }
 
+/* ---------- Search results ---------- */
+.search-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+}
+.search-error {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--rust);
+  border-radius: 6px;
+  background: #fdebe2;
+  color: var(--rust-dark);
+}
+.is-loading .book-grid { opacity: 0.55; transition: opacity 0.15s; }
+
+.book-card .book-meta { margin: -0.4rem 0 0.5rem; font-size: 0.82rem; color: var(--muted); }
+.book-card .book-desc {
+  display: -webkit-box;
+  margin: 0 0 0.7rem;
+  overflow: hidden;
+  font-size: 0.85rem;
+  color: var(--ink);
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Styled fallback cover for API books (no cover images) */
+.cover-fallback {
+  position: relative;
+  align-content: center;
+  gap: 0.6rem;
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.10) 0 8%, transparent 8%);
+}
+.cover-fallback .cover-initial {
+  font-family: var(--font-head);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.cover-fallback .cover-rule {
+  justify-self: center;
+  width: 40%;
+  height: 3px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.7;
+}
+.cover-fallback.tone-0 { background-color: #cfe0c6; color: #2f5e3c; }
+.cover-fallback.tone-1 { background-color: #f6dfbd; color: #8a6a2f; }
+.cover-fallback.tone-2 { background-color: #e9c9c0; color: var(--rust-dark); }
+.cover-fallback.tone-3 { background-color: #3b3f86; color: #f5d77a; }
+.cover-fallback.tone-4 { background-color: #f3b06b; color: #8a3b22; }
+.cover-fallback.tone-5 { background-color: var(--green); color: #f3ead9; }
+
 /* ---------- Categories ---------- */
 .chip-list {
   display: flex;
@@ -400,41 +461,9 @@ img, svg { display: block; }
    AUTH PAGES (Login + Register)
    ========================================================== */
 
-/* ---------- Form fields (shared) ---------- */
-.form-field { margin-bottom: 1rem; }
-.form-field label,
-.label-row {
-  display: block;
-  margin-bottom: 0.35rem;
-  font-family: var(--font-head);
-  font-weight: 700;
-}
-.label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.label-row a { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; }
-
-.input-wrap { position: relative; }
-.input-wrap .icon {
-  position: absolute;
-  left: 0.8rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-}
-.input-wrap input {
-  width: 100%;
-  padding: 0.7rem 0.9rem 0.7rem 2.5rem;
-  border: 1.5px solid #cdbba5;
-  border-radius: 8px;
-  background: #fff;
-  font: inherit;
-}
-.input-wrap input:focus { border-color: var(--green); outline: none; box-shadow: 0 0 0 3px var(--green-soft); }
-
-.hint { margin: 0.3rem 0 0; font-size: 0.82rem; color: var(--muted); }
+/* ---------- Shared auth elements ---------- */
+.auth-lead { margin: 0 0 1.25rem; color: var(--muted); }
+.auth-lead strong { color: var(--ink); word-break: break-all; }
 
 .divider {
   display: flex;
@@ -449,27 +478,57 @@ img, svg { display: block; }
 .switch-auth { margin: 1.1rem 0 0; text-align: center; }
 .switch-auth a { font-weight: 700; }
 
-.demo-banner {
-  margin: 0 0 1.25rem;
-  padding: 0.6rem 0.85rem;
-  border: 1px dashed #d8b48f;
-  border-radius: 6px;
-  background: #fff4e6;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
-/* Notice revealed with :target after a demo "submit" — no JavaScript */
-.demo-notice {
-  display: none;
+/* Error / info message filled in by auth.js (text only) */
+.auth-message {
   margin: 0 0 1.25rem;
   padding: 0.75rem 1rem;
-  border-left: 4px solid var(--green);
+  border-left: 4px solid var(--rust);
   border-radius: 6px;
-  background: var(--green-soft);
-  color: var(--green-dark);
+  background: #fdebe2;
+  color: var(--rust-dark);
 }
-.demo-notice:target { display: block; }
+.topbar-message { margin: 1rem 2.5rem 0; }
+
+/* "Signing you in…" */
+.auth-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  color: var(--green);
+}
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--green-soft);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.auth-steps { margin: 0 0 1.5rem; padding-left: 1.3rem; }
+.auth-steps li { margin-bottom: 0.4rem; padding-left: 0.2rem; }
+.auth-steps li::marker { color: var(--rust); font-family: var(--font-head); font-weight: 700; }
+
+/* Signed-in chip in the home top bar */
+.user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--green);
+}
+.user-email {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* ---------- Login ---------- */
 .auth-header {
@@ -593,6 +652,8 @@ img, svg { display: block; }
   .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem; }
   .hero-art { min-height: 200px; }
   .featured, .categories { padding: 1.5rem 1.25rem; }
+  .topbar-message { margin: 1rem 1.25rem 0; }
+  .user-email { max-width: 160px; }
   .section-head { flex-direction: column; }
 
   .deco { display: none; }
@@ -607,4 +668,6 @@ img, svg { display: block; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .book-card, .btn { transition: none; }
+  .spinner { animation-duration: 2.4s; }
+  .is-loading .book-grid { transition: none; }
 }
